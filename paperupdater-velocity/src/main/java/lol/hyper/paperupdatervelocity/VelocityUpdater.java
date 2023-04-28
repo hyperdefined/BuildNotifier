@@ -24,6 +24,9 @@ public final class VelocityUpdater {
     private final Logger logger;
     private final ProxyServer server;
 
+    public VelocityPlugin velocityPlugin;
+    public int buildNumber = -1;
+
     @Inject
     public VelocityUpdater(ProxyServer server, Logger logger) {
         this.server = server;
@@ -41,7 +44,6 @@ public final class VelocityUpdater {
         String patternString = "b\\d+";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(versionParts[1]);
-        int buildNumber = -1;
         if (matcher.find()) {
             buildNumber = Integer.parseInt(matcher.group().replace("b", ""));
         }
@@ -51,7 +53,7 @@ public final class VelocityUpdater {
             return;
         }
 
-        VelocityPlugin velocityPlugin = new VelocityPlugin(logger, velocityVersion, buildNumber);
+        velocityPlugin = new VelocityPlugin(logger, velocityVersion, buildNumber);
         int latestVelocityBuild = velocityPlugin.getLatestBuild();
         // Server is outdated
         if (buildNumber < latestVelocityBuild) {

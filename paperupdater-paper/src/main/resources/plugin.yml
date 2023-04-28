@@ -4,3 +4,7 @@ main: lol.hyper.paperupdaterpaper.PaperUpdater
 author: hyperdefined
 api-version: 1.19
 description: "Automatically check for Paper/Waterfall/Velocity updates."
+permissions:
+  paperupdater.message:
+    default: op
+    description: "If players have this, they will receive messages on join about server updates."

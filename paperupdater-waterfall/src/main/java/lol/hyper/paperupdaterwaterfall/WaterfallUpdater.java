@@ -1,6 +1,8 @@
 package lol.hyper.paperupdaterwaterfall;
 
 import lol.hyper.paperupdatercore.WaterfallPlugin;
+import lol.hyper.paperupdaterwaterfall.events.PlayerJoin;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.util.logging.Logger;
@@ -12,6 +14,7 @@ public final class WaterfallUpdater extends Plugin {
     private final Logger logger = this.getLogger();
 
     public WaterfallPlugin waterfallPlugin;
+    public int buildNumber = -1;
 
     @Override
     public void onEnable() {
@@ -23,7 +26,6 @@ public final class WaterfallUpdater extends Plugin {
         String patternString = ":(\\d+\\.\\d+)-.*:(\\d+)$";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(serverVersion);
-        int buildNumber = -1;
         String minecraftVersion = null;
         if (matcher.find()) {
             minecraftVersion = matcher.group(1);
@@ -42,5 +44,8 @@ public final class WaterfallUpdater extends Plugin {
             logger.warning("Your Waterfall version is outdated. The latest version is " + latestWaterfallBuild + ".");
             logger.warning("You are currently " + waterfallPlugin.getBuildsBehind() + " builds behind.");
         }
+
+        PlayerJoin playerJoin = new PlayerJoin(this);
+        ProxyServer.getInstance().getPluginManager().registerListener(this, playerJoin);
     }
 }
