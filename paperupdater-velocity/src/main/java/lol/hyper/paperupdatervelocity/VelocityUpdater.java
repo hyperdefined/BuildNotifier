@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
         name = "PaperUpdater",
         version = "1.0",
         authors = {"hyperdefined"},
-        description = "Auto check for Paper/Waterfall/Velocity updates.",
+        description = "Automatically check for Paper/Waterfall/Velocity updates.",
         url = "https://github.com/hyperdefined/PaperUpdater"
 )
 public final class VelocityUpdater {
