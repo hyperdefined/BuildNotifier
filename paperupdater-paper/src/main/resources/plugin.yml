@@ -1,0 +1,4 @@
+name: PaperUpdater
+version: '${project.version}'
+main: lol.hyper.paperupdaterpaper.PaperUpdater
+api-version: 1.19
