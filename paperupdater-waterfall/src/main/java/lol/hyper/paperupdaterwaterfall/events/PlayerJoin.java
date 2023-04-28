@@ -1,8 +1,8 @@
 package lol.hyper.paperupdaterwaterfall.events;
 
-import lol.hyper.paperupdatercore.WaterfallPlugin;
 import lol.hyper.paperupdaterwaterfall.WaterfallUpdater;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -35,7 +35,8 @@ public class PlayerJoin implements Listener {
         if (waterfallUpdater.buildNumber < latestPaperBuild) {
             BaseComponent[] messageOne = new ComponentBuilder("Your Waterfall version is outdated. The latest build is " + latestPaperBuild + ".").color(ChatColor.YELLOW).create();
             BaseComponent[] messageTwo = new ComponentBuilder("You are currently " + buildsBehind + " build(s) behind.").color(ChatColor.YELLOW).create();
-            player.setTabHeader(messageOne, messageTwo);
+            player.sendMessage(ChatMessageType.SYSTEM, messageOne);
+            player.sendMessage(ChatMessageType.SYSTEM, messageTwo);
         }
     }
 }
