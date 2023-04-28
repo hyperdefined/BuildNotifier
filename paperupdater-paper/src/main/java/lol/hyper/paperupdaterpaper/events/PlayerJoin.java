@@ -26,8 +26,8 @@ public class PlayerJoin implements Listener {
         int latestPaperBuild = paperUpdater.paperPlugin.getLatestBuild();
         int buildsBehind = paperUpdater.paperPlugin.getBuildsBehind();
         if (paperUpdater.buildNumber < latestPaperBuild) {
-            player.sendMessage(Component.text("Your Paper version is outdated. The latest version is " + latestPaperBuild + ".").color(NamedTextColor.YELLOW));
-            player.sendMessage(Component.text("You are currently " + buildsBehind + " builds behind.").color(NamedTextColor.YELLOW));
+            player.sendMessage(Component.text("Your Paper version is outdated. The latest build is " + latestPaperBuild + ".").color(NamedTextColor.YELLOW));
+            player.sendMessage(Component.text("You are currently " + buildsBehind + " build(s) behind.").color(NamedTextColor.YELLOW));
         }
     }
 }

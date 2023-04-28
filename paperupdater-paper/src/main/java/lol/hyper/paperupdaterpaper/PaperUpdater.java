@@ -41,8 +41,8 @@ public final class PaperUpdater extends JavaPlugin {
         int latestPaperBuild = paperPlugin.getLatestBuild();
         // Server is outdated
         if (buildNumber < latestPaperBuild) {
-            logger.warning("Your Paper version is outdated. The latest version is " + latestPaperBuild + ".");
-            logger.warning("You are currently " + paperPlugin.getBuildsBehind() + " builds behind.");
+            logger.warning("Your Paper version is outdated. The latest build is " + latestPaperBuild + ".");
+            logger.warning("You are currently " + paperPlugin.getBuildsBehind() + " build(s) behind.");
         }
 
         PlayerJoin playerJoin = new PlayerJoin(this);

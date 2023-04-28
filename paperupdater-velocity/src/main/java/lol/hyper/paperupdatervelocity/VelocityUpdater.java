@@ -57,8 +57,8 @@ public final class VelocityUpdater {
         int latestVelocityBuild = velocityPlugin.getLatestBuild();
         // Server is outdated
         if (buildNumber < latestVelocityBuild) {
-            logger.warning("Your Velocity version is outdated. The latest version is " + latestVelocityBuild + ".");
-            logger.warning("You are currently " + velocityPlugin.getBuildsBehind() + " builds behind.");
+            logger.warning("Your Velocity version is outdated. The latest build is " + latestVelocityBuild + ".");
+            logger.warning("You are currently " + velocityPlugin.getBuildsBehind() + " build(s) behind.");
         }
     }
 }

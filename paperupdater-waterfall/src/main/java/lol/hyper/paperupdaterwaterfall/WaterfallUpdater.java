@@ -41,8 +41,8 @@ public final class WaterfallUpdater extends Plugin {
         int latestWaterfallBuild = waterfallPlugin.getLatestBuild();
         // Server is outdated
         if (buildNumber < latestWaterfallBuild) {
-            logger.warning("Your Waterfall version is outdated. The latest version is " + latestWaterfallBuild + ".");
-            logger.warning("You are currently " + waterfallPlugin.getBuildsBehind() + " builds behind.");
+            logger.warning("Your Waterfall version is outdated. The latest build is " + latestWaterfallBuild + ".");
+            logger.warning("You are currently " + waterfallPlugin.getBuildsBehind() + " build(s) behind.");
         }
 
         PlayerJoin playerJoin = new PlayerJoin(this);

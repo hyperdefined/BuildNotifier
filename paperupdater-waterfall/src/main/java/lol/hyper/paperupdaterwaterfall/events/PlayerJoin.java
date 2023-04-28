@@ -21,7 +21,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPing(ServerSwitchEvent event) {
         // player is joining the proxy
-        if (event.getFrom() == null) {
+        if (event.getFrom() != null) {
             return;
         }
 
@@ -33,8 +33,8 @@ public class PlayerJoin implements Listener {
         int latestPaperBuild = waterfallUpdater.waterfallPlugin.getLatestBuild();
         int buildsBehind = waterfallUpdater.waterfallPlugin.getBuildsBehind();
         if (waterfallUpdater.buildNumber < latestPaperBuild) {
-            BaseComponent[] messageOne = new ComponentBuilder("Your Waterfall version is outdated. The latest version is " + latestPaperBuild + ".").color(ChatColor.YELLOW).create();
-            BaseComponent[] messageTwo = new ComponentBuilder("You are currently " + buildsBehind + " builds behind.").color(ChatColor.YELLOW).create();
+            BaseComponent[] messageOne = new ComponentBuilder("Your Waterfall version is outdated. The latest build is " + latestPaperBuild + ".").color(ChatColor.YELLOW).create();
+            BaseComponent[] messageTwo = new ComponentBuilder("You are currently " + buildsBehind + " build(s) behind.").color(ChatColor.YELLOW).create();
             player.setTabHeader(messageOne, messageTwo);
         }
     }
