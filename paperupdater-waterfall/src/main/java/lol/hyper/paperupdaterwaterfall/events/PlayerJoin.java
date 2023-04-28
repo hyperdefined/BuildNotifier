@@ -3,12 +3,15 @@ package lol.hyper.paperupdaterwaterfall.events;
 import lol.hyper.paperupdaterwaterfall.WaterfallUpdater;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+
+import java.util.concurrent.TimeUnit;
 
 public class PlayerJoin implements Listener {
 
@@ -35,8 +38,10 @@ public class PlayerJoin implements Listener {
         if (waterfallUpdater.buildNumber < latestPaperBuild) {
             BaseComponent[] messageOne = new ComponentBuilder("Your Waterfall version is outdated. The latest build is " + latestPaperBuild + ".").color(ChatColor.YELLOW).create();
             BaseComponent[] messageTwo = new ComponentBuilder("You are currently " + buildsBehind + " build(s) behind.").color(ChatColor.YELLOW).create();
-            player.sendMessage(ChatMessageType.SYSTEM, messageOne);
-            player.sendMessage(ChatMessageType.SYSTEM, messageTwo);
+            ProxyServer.getInstance().getScheduler().schedule(waterfallUpdater, () -> {
+                player.sendMessage(ChatMessageType.SYSTEM, messageOne);
+                player.sendMessage(ChatMessageType.SYSTEM, messageTwo);
+            }, 10, TimeUnit.SECONDS);
         }
     }
 }

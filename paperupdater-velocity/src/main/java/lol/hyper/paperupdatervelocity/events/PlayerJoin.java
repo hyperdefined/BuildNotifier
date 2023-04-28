@@ -8,6 +8,8 @@ import lol.hyper.paperupdatervelocity.VelocityUpdater;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
+import java.util.concurrent.TimeUnit;
+
 public class PlayerJoin {
 
     private final VelocityUpdater velocityUpdater;
@@ -32,8 +34,10 @@ public class PlayerJoin {
         int latestVelocityBuild = velocityUpdater.velocityPlugin.getLatestBuild();
         int buildsBehind = velocityUpdater.velocityPlugin.getBuildsBehind();
         if (velocityUpdater.buildNumber < latestVelocityBuild) {
-            player.sendMessage(Component.text("Your Velocity version is outdated. The latest version is " + latestVelocityBuild + ".").color(NamedTextColor.YELLOW));
-            player.sendMessage(Component.text("You are currently " + buildsBehind + " builds behind.").color(NamedTextColor.YELLOW));
+            velocityUpdater.server.getScheduler().buildTask(velocityUpdater, (task) -> {
+                player.sendMessage(Component.text("Your Velocity version is outdated. The latest version is " + latestVelocityBuild + ".").color(NamedTextColor.YELLOW));
+                player.sendMessage(Component.text("You are currently " + buildsBehind + " builds behind.").color(NamedTextColor.YELLOW));
+            }).delay(10, TimeUnit.SECONDS).schedule();
         }
     }
 }

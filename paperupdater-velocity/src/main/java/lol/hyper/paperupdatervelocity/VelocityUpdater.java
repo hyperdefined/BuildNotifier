@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 public final class VelocityUpdater {
 
     private final Logger logger;
-    private final ProxyServer server;
+    public final ProxyServer server;
 
     public VelocityPlugin velocityPlugin;
     public int buildNumber = -1;
