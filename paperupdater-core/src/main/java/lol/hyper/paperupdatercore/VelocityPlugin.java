@@ -15,6 +15,13 @@ public class VelocityPlugin {
     private int buildsBehind;
     private int latestBuild;
 
+    /**
+     * Creates a VelocityPlugin object, which will load version information.
+     *
+     * @param pluginLogger    The plugin logger.
+     * @param velocityVersion The Velocity version.
+     * @param velocityBuild   The current Velocity build.
+     */
     public VelocityPlugin(Logger pluginLogger, String velocityVersion, int velocityBuild) {
         this.pluginLogger = pluginLogger;
         this.velocityVersion = velocityVersion;
@@ -44,10 +51,20 @@ public class VelocityPlugin {
         buildsBehind = latestBuild - velocityBuild;
     }
 
+    /**
+     * Returns how many builds behind.
+     *
+     * @return The number behind.
+     */
     public int getBuildsBehind() {
         return buildsBehind;
     }
 
+    /**
+     * Returns the latest build.
+     *
+     * @return The latest behind.
+     */
     public int getLatestBuild() {
         return latestBuild;
     }

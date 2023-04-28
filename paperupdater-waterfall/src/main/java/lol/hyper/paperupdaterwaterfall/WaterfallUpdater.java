@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class PaperUpdater extends Plugin {
+public final class WaterfallUpdater extends Plugin {
 
     private final Logger logger = this.getLogger();
 
@@ -15,8 +15,11 @@ public final class PaperUpdater extends Plugin {
 
     @Override
     public void onEnable() {
+        // get some basic information about the server
         String serverVersion = this.getProxy().getVersion();
         logger.info("Running " + serverVersion);
+        // use regex to get the build and MC version
+        // if there is a better way please show me :)
         String patternString = ":(\\d+\\.\\d+)-.*:(\\d+)$";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(serverVersion);
@@ -27,6 +30,7 @@ public final class PaperUpdater extends Plugin {
             buildNumber = Integer.parseInt(matcher.group(2));
         }
 
+        // if the regex failed, don't bother checking
         if (buildNumber == -1 || minecraftVersion == null) {
             return;
         }

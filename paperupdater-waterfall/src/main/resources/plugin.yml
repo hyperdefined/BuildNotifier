@@ -1,4 +1,5 @@
 name: PaperUpdater
 version: '${project.version}'
-main: lol.hyper.paperupdaterwaterfall.PaperUpdater
+main: lol.hyper.paperupdaterwaterfall.WaterfallUpdater
+author: hyperdefined
 api-version: 1.19

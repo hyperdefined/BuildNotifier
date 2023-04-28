@@ -1,4 +1,5 @@
 name: PaperUpdater
 version: '${project.version}'
 main: lol.hyper.paperupdaterpaper.PaperUpdater
+author: hyperdefined
 api-version: 1.19

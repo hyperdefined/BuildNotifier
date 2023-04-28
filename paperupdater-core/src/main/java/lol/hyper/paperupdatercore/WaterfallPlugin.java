@@ -16,6 +16,13 @@ public class WaterfallPlugin {
     private int latestBuild;
     private int buildsBehind;
 
+    /**
+     * Creates a WaterfallPlugin object, which will load version information.
+     *
+     * @param plugin         The plugin.
+     * @param serverVersion  The Minecraft server version.
+     * @param waterfallBuild The current Waterfall build.
+     */
     public WaterfallPlugin(Plugin plugin, String serverVersion, int waterfallBuild) {
         this.pluginLogger = plugin.getLogger();
         this.serverVersion = serverVersion;
@@ -45,10 +52,20 @@ public class WaterfallPlugin {
         buildsBehind = latestBuild - waterfallBuild;
     }
 
+    /**
+     * Returns how many builds behind.
+     *
+     * @return The number behind.
+     */
     public int getBuildsBehind() {
         return buildsBehind;
     }
 
+    /**
+     * Returns the latest build.
+     *
+     * @return The latest behind.
+     */
     public int getLatestBuild() {
         return latestBuild;
     }

@@ -19,23 +19,25 @@ import java.util.regex.Pattern;
         description = "Auto check for Paper/Waterfall/Velocity updates.",
         url = "https://github.com/hyperdefined/PaperUpdater"
 )
-public final class PaperUpdater {
+public final class VelocityUpdater {
 
     private final Logger logger;
     private final ProxyServer server;
 
     @Inject
-    public PaperUpdater(ProxyServer server, Logger logger) {
+    public VelocityUpdater(ProxyServer server, Logger logger) {
         this.server = server;
         this.logger = logger;
     }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
+        // get some basic information about the server
         String version = server.getVersion().getVersion();
         String[] versionParts = version.split(" ", 2);
         String velocityVersion = versionParts[0];
         logger.info("Running " + version);
+        // use regex to get the build
         String patternString = "b\\d+";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(versionParts[1]);
@@ -44,9 +46,11 @@ public final class PaperUpdater {
             buildNumber = Integer.parseInt(matcher.group().replace("b", ""));
         }
 
+        // if the regex failed, don't bother checking
         if (buildNumber == -1 || velocityVersion == null) {
             return;
         }
+
         VelocityPlugin velocityPlugin = new VelocityPlugin(logger, velocityVersion, buildNumber);
         int latestVelocityBuild = velocityPlugin.getLatestBuild();
         // Server is outdated
