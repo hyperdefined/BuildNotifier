@@ -10,5 +10,9 @@
 
 Automatically check for Paper/Waterfall/Velocity updates on server start up. This does NOT download versions for you.
 
+## Features
+* Logs to console on startup if there are any new versions.
+* Anyone who is opped or has `paperupdater.message` will receieve a message in game on join if there's a new version.
+
 ## License
 This plugin is released under GNU General Public License v3. See [LICENSE](https://github.com/hyperdefined/PaperUpdater/blob/master/LICENSE).
