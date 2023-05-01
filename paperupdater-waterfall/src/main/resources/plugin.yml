@@ -1,6 +1,0 @@
-name: PaperUpdater
-version: '${project.version}'
-main: lol.hyper.paperupdaterwaterfall.WaterfallUpdater
-author: hyperdefined
-api-version: 1.19
-description: "Automatically check for Paper/Waterfall/Velocity updates."

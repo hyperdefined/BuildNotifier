@@ -1,9 +1,9 @@
-<h1 align="center">PaperUpdater</h1>
+<h1 align="center">BuildNotifier</h1>
 
 <p align="center">
 	<img src="https://img.shields.io/badge/Minecraft-1.19+-orange" alt="Minecraft versions">
-	<img src="https://img.shields.io/github/v/release/hyperdefined/PaperUpdater" alt="GitHub release (latest by date)">
-	<a href="https://github.com/hyperdefined/PaperUpdater/releases"><img src="https://img.shields.io/github/downloads/hyperdefined/PaperUpdater/total?logo=github" alt="Downloads"></a>
+	<img src="https://img.shields.io/github/v/release/hyperdefined/BuildNotifier" alt="GitHub release (latest by date)">
+	<a href="https://github.com/hyperdefined/BuildNotifier/releases"><img src="https://img.shields.io/github/downloads/hyperdefined/BuildNotifier/total?logo=github" alt="Downloads"></a>
 	<a href="https://ko-fi.com/hyperdefined"><img src="https://img.shields.io/badge/Donate-Ko--fi-red" alt="Donate via Ko-fi"></a>
 	<a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a>
 </p>
@@ -12,7 +12,7 @@ Automatically check for Paper/Waterfall/Velocity updates on server start up. Thi
 
 ## Features
 * Logs to console on startup if there are any new versions.
-* Anyone who is opped or has `paperupdater.message` will receieve a message in game on join if there's a new version.
+* Anyone who is OP or has `buildnotifier.message` will receive a message in game on join if there's a new version.
 
 ## License
-This plugin is released under GNU General Public License v3. See [LICENSE](https://github.com/hyperdefined/PaperUpdater/blob/master/LICENSE).
+This plugin is released under GNU General Public License v3. See [LICENSE](https://github.com/hyperdefined/BuildNotifier/blob/master/LICENSE).

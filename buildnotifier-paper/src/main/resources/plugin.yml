@@ -1,0 +1,10 @@
+name: BuildNotifier-Paper
+version: '${project.version}'
+main: lol.hyper.buildnotifier.paper.BuildNotifierPaper
+author: hyperdefined
+api-version: 1.19
+description: "Automatically check for Paper/Waterfall/Velocity updates."
+permissions:
+  buildnotifier.message:
+    default: op
+    description: "If players have this, they will receive messages on join about server updates."

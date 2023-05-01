@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ This file is part of PaperUpdater.
+  ~ This file is part of BuildNotifier.
   ~
-  ~ PaperUpdater is free software: you can redistribute it and/or modify
+  ~ BuildNotifier is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ PaperUpdater is distributed in the hope that it will be useful,
+  ~ BuildNotifier is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with PaperUpdater.  If not, see <https://www.gnu.org/licenses/>.
+  ~ along with BuildNotifier.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lol.hyper</groupId>
-    <artifactId>paperupdater</artifactId>
+    <artifactId>buildnotifier</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
@@ -32,9 +32,9 @@
     </properties>
 
     <modules>
-        <module>paperupdater-core</module>
-        <module>paperupdater-paper</module>
-        <module>paperupdater-waterfall</module>
-        <module>paperupdater-velocity</module>
+        <module>buildnotifier-core</module>
+        <module>buildnotifier-paper</module>
+        <module>buildnotifier-waterfall</module>
+        <module>buildnotifier-velocity</module>
     </modules>
 </project>
