@@ -37,7 +37,6 @@ public final class BuildNotifierWaterfall extends Plugin {
     public void onEnable() {
         // get some basic information about the server
         String serverVersion = this.getProxy().getVersion();
-        logger.info("Running " + serverVersion);
         // use regex to get the build and MC version
         // if there is a better way please show me :)
         String patternString = ":(\\d+\\.\\d+)-.*:(\\d+)$";
@@ -53,6 +52,9 @@ public final class BuildNotifierWaterfall extends Plugin {
         if (buildNumber == -1 || minecraftVersion == null) {
             return;
         }
+
+        logger.info("Running Minecraft version: " + minecraftVersion);
+        logger.info("Running Waterfall build: " + buildNumber);
 
         waterfallPlugin = new WaterfallPlugin(this, minecraftVersion, buildNumber);
         int latestWaterfallBuild = waterfallPlugin.getLatestBuild();

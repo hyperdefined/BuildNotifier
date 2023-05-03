@@ -20,6 +20,7 @@ package lol.hyper.buildnotifier.velocity;
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
+import com.velocitypowered.api.network.ProtocolVersion;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import lol.hyper.buildnotifier.core.VelocityPlugin;
@@ -56,7 +57,6 @@ public final class BuildNotifierVelocity {
         String version = server.getVersion().getVersion();
         String[] versionParts = version.split(" ", 2);
         String velocityVersion = versionParts[0];
-        logger.info("Running " + version);
         // use regex to get the build
         String patternString = "b\\d+";
         Pattern pattern = Pattern.compile(patternString);
@@ -69,6 +69,10 @@ public final class BuildNotifierVelocity {
         if (buildNumber == -1 || velocityVersion == null) {
             return;
         }
+
+        logger.info("Running Velocity version: " + velocityVersion);
+        logger.info("Running Velocity build: " + buildNumber);
+        logger.info("Supporting Minecraft versions: " + ProtocolVersion.SUPPORTED_VERSION_STRING);
 
         velocityPlugin = new VelocityPlugin(logger, velocityVersion, buildNumber);
         int latestVelocityBuild = velocityPlugin.getLatestBuild();

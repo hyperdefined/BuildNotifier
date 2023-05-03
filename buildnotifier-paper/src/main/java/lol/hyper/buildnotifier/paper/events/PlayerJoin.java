@@ -37,7 +37,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("paperupdater.message")) {
+        if (!player.hasPermission("buildnotifier.message")) {
             return;
         }
 

@@ -37,7 +37,6 @@ public final class BuildNotifierPaper extends JavaPlugin {
     public void onEnable() {
         // get some basic information about the server
         String serverVersion = Bukkit.getServer().getVersion();
-        logger.info("Running " + serverVersion);
         // use regex to get the build and MC version
         // if there is a better way please show me :)
         String patternString = "git-Paper-(\\w+) \\(MC: (\\d+\\.\\d+\\.\\d+)\\)";
@@ -53,6 +52,9 @@ public final class BuildNotifierPaper extends JavaPlugin {
         if (buildNumber == -1 || minecraftVersion == null) {
             return;
         }
+
+        logger.info("Running Minecraft version: " + minecraftVersion);
+        logger.info("Running Paper build: " + buildNumber);
 
         paperPlugin = new PaperPlugin(this, minecraftVersion, buildNumber);
         int latestPaperBuild = paperPlugin.getLatestBuild();
