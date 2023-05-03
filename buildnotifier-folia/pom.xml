@@ -99,7 +99,7 @@
         <dependency>
             <groupId>lol.hyper</groupId>
             <artifactId>buildnotifier-core</artifactId>
-            <version>1.0</version>
+            <version>1.0.1</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>
