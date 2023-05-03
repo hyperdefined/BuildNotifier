@@ -33,9 +33,9 @@ import java.util.regex.Pattern;
 @Plugin(
         id = "buildnotifiervelocity",
         name = "BuildNotifier-Velocity",
-        version = "1.0",
+        version = "1.0.1",
         authors = {"hyperdefined"},
-        description = "Automatically check for Paper/Waterfall/Velocity updates.",
+        description = "Automatically check for Paper/Waterfall/Velocity/Folia updates.",
         url = "https://github.com/hyperdefined/BuildNotifier"
 )
 public final class BuildNotifierVelocity {

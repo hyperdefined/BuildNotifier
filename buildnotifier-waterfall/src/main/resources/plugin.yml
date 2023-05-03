@@ -3,4 +3,4 @@ version: '${project.version}'
 main: lol.hyper.buildnotifier.waterfall.BuildNotifierWaterfall
 author: hyperdefined
 api-version: 1.19
-description: "Automatically check for Paper/Waterfall/Velocity updates."
+description: "Automatically check for Paper/Waterfall/Velocity/Folia updates."
