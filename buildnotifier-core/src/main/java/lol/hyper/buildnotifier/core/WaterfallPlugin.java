@@ -48,7 +48,7 @@ public class WaterfallPlugin {
     }
 
     /**
-     * Checks the Paper version against the API.
+     * Checks the Waterfall version against the API.
      */
     public void check() {
         JSONObject versionData;

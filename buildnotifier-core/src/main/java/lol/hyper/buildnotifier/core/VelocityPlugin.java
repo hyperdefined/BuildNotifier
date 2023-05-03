@@ -47,7 +47,7 @@ public class VelocityPlugin {
     }
 
     /**
-     * Checks the Paper version against the API.
+     * Checks the Velocity version against the API.
      */
     public void check() {
         JSONObject versionData;
