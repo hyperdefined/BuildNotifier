@@ -24,6 +24,7 @@ import com.velocitypowered.api.network.ProtocolVersion;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import lol.hyper.buildnotifier.core.VelocityHelper;
+import lol.hyper.buildnotifier.velocity.events.PlayerJoin;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -80,5 +81,8 @@ public final class BuildNotifierVelocity {
             logger.warning("Your Velocity version is outdated. The latest build is " + latestVelocityBuild + ".");
             logger.warning("You are currently " + velocityHelper.getBuildsBehind() + " build(s) behind.");
         }
+
+        PlayerJoin playerJoin = new PlayerJoin(this);
+        server.getEventManager().register(this, playerJoin);
     }
 }
