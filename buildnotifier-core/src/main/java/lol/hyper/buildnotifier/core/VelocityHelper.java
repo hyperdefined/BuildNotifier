@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public class VelocityPlugin {
+public class VelocityHelper {
 
     private final Logger pluginLogger;
     private final String velocityVersion;
@@ -39,7 +39,7 @@ public class VelocityPlugin {
      * @param velocityVersion The Velocity version.
      * @param velocityBuild   The current Velocity build.
      */
-    public VelocityPlugin(Logger pluginLogger, String velocityVersion, int velocityBuild) {
+    public VelocityHelper(Logger pluginLogger, String velocityVersion, int velocityBuild) {
         this.pluginLogger = pluginLogger;
         this.velocityVersion = velocityVersion;
         this.velocityBuild = velocityBuild;

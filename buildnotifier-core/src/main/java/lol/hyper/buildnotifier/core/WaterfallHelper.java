@@ -17,56 +17,56 @@
 
 package lol.hyper.buildnotifier.core;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import net.md_5.bungee.api.plugin.Plugin;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public class PaperPlugin {
+public class WaterfallHelper {
 
     private final Logger pluginLogger;
     private final String serverVersion;
-    private final int paperBuild;
+    private final int waterfallBuild;
 
     private int latestBuild;
     private int buildsBehind;
 
     /**
-     * Creates a PaperPlugin object, which will load version information.
+     * Creates a WaterfallPlugin object, which will load version information.
      *
-     * @param plugin        The plugin.
-     * @param serverVersion The Minecraft server version.
-     * @param paperBuild    The current paper build.
+     * @param plugin         The plugin.
+     * @param serverVersion  The Minecraft server version.
+     * @param waterfallBuild The current Waterfall build.
      */
-    public PaperPlugin(JavaPlugin plugin, String serverVersion, int paperBuild) {
+    public WaterfallHelper(Plugin plugin, String serverVersion, int waterfallBuild) {
         this.pluginLogger = plugin.getLogger();
         this.serverVersion = serverVersion;
-        this.paperBuild = paperBuild;
+        this.waterfallBuild = waterfallBuild;
         check();
     }
 
     /**
-     * Checks the Paper version against the API.
+     * Checks the Waterfall version against the API.
      */
     public void check() {
         JSONObject versionData;
 
         try {
-            versionData = JSONReader.requestJSON("https://api.papermc.io/v2/projects/paper/versions/" + serverVersion);
+            versionData = JSONReader.requestJSON("https://api.papermc.io/v2/projects/waterfall/versions/" + serverVersion);
             if (versionData == null) {
-                pluginLogger.warning("Unable to lookup version data. URL " + "https://api.papermc.io/v2/projects/paper/versions/" + serverVersion);
+                pluginLogger.warning("Unable to lookup version data. URL " + "https://api.papermc.io/v2/projects/waterfall/versions/" + serverVersion);
                 return;
             }
         } catch (IOException exception) {
-            pluginLogger.warning("Unable to lookup version data. URL " + "https://api.papermc.io/v2/projects/paper/versions/" + serverVersion);
+            pluginLogger.warning("Unable to lookup version data. URL " + "https://api.papermc.io/v2/projects/waterfall/versions/" + serverVersion);
             exception.printStackTrace();
             return;
         }
         JSONArray allBuilds = versionData.getJSONArray("builds");
         latestBuild = allBuilds.getInt(allBuilds.length() - 1);
-        buildsBehind = latestBuild - paperBuild;
+        buildsBehind = latestBuild - waterfallBuild;
     }
 
     /**

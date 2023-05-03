@@ -48,8 +48,8 @@ public class PlayerJoin {
             return;
         }
 
-        int latestVelocityBuild = buildNotifierVelocity.velocityPlugin.getLatestBuild();
-        int buildsBehind = buildNotifierVelocity.velocityPlugin.getBuildsBehind();
+        int latestVelocityBuild = buildNotifierVelocity.velocityHelper.getLatestBuild();
+        int buildsBehind = buildNotifierVelocity.velocityHelper.getBuildsBehind();
         if (buildNotifierVelocity.buildNumber < latestVelocityBuild) {
             buildNotifierVelocity.server.getScheduler().buildTask(buildNotifierVelocity, (task) -> {
                 player.sendMessage(Component.text("Your Velocity version is outdated. The latest version is " + latestVelocityBuild + ".").color(NamedTextColor.YELLOW));

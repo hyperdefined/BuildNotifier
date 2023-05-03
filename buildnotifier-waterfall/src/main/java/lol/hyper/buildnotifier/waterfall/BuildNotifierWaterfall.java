@@ -18,7 +18,7 @@
 package lol.hyper.buildnotifier.waterfall;
 
 import lol.hyper.buildnotifier.waterfall.events.PlayerJoin;
-import lol.hyper.buildnotifier.core.WaterfallPlugin;
+import lol.hyper.buildnotifier.core.WaterfallHelper;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -29,9 +29,8 @@ import java.util.regex.Pattern;
 public final class BuildNotifierWaterfall extends Plugin {
 
     private final Logger logger = this.getLogger();
-
-    public WaterfallPlugin waterfallPlugin;
     public int buildNumber = -1;
+    public WaterfallHelper waterfallHelper;
 
     @Override
     public void onEnable() {
@@ -56,12 +55,12 @@ public final class BuildNotifierWaterfall extends Plugin {
         logger.info("Running Minecraft version: " + minecraftVersion);
         logger.info("Running Waterfall build: " + buildNumber);
 
-        waterfallPlugin = new WaterfallPlugin(this, minecraftVersion, buildNumber);
-        int latestWaterfallBuild = waterfallPlugin.getLatestBuild();
+        waterfallHelper = new WaterfallHelper(this, minecraftVersion, buildNumber);
+        int latestWaterfallBuild = waterfallHelper.getLatestBuild();
         // Server is outdated
         if (buildNumber < latestWaterfallBuild) {
             logger.warning("Your Waterfall version is outdated. The latest build is " + latestWaterfallBuild + ".");
-            logger.warning("You are currently " + waterfallPlugin.getBuildsBehind() + " build(s) behind.");
+            logger.warning("You are currently " + waterfallHelper.getBuildsBehind() + " build(s) behind.");
         }
 
         PlayerJoin playerJoin = new PlayerJoin(this);

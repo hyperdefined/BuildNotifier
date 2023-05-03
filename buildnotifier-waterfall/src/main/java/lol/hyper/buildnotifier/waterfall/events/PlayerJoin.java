@@ -50,8 +50,8 @@ public class PlayerJoin implements Listener {
             return;
         }
 
-        int latestPaperBuild = buildNotifierWaterfall.waterfallPlugin.getLatestBuild();
-        int buildsBehind = buildNotifierWaterfall.waterfallPlugin.getBuildsBehind();
+        int latestPaperBuild = buildNotifierWaterfall.waterfallHelper.getLatestBuild();
+        int buildsBehind = buildNotifierWaterfall.waterfallHelper.getBuildsBehind();
         if (buildNotifierWaterfall.buildNumber < latestPaperBuild) {
             BaseComponent[] messageOne = new ComponentBuilder("Your Waterfall version is outdated. The latest build is " + latestPaperBuild + ".").color(ChatColor.YELLOW).create();
             BaseComponent[] messageTwo = new ComponentBuilder("You are currently " + buildsBehind + " build(s) behind.").color(ChatColor.YELLOW).create();

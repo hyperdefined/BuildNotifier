@@ -36,5 +36,6 @@
         <module>buildnotifier-paper</module>
         <module>buildnotifier-waterfall</module>
         <module>buildnotifier-velocity</module>
+        <module>buildnotifier-folia</module>
     </modules>
 </project>

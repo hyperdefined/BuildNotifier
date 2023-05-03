@@ -23,7 +23,7 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.network.ProtocolVersion;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
-import lol.hyper.buildnotifier.core.VelocityPlugin;
+import lol.hyper.buildnotifier.core.VelocityHelper;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -41,9 +41,8 @@ public final class BuildNotifierVelocity {
 
     private final Logger logger;
     public final ProxyServer server;
-
-    public VelocityPlugin velocityPlugin;
     public int buildNumber = -1;
+    public VelocityHelper velocityHelper;
 
     @Inject
     public BuildNotifierVelocity(ProxyServer server, Logger logger) {
@@ -74,12 +73,12 @@ public final class BuildNotifierVelocity {
         logger.info("Running Velocity build: " + buildNumber);
         logger.info("Supporting Minecraft versions: " + ProtocolVersion.SUPPORTED_VERSION_STRING);
 
-        velocityPlugin = new VelocityPlugin(logger, velocityVersion, buildNumber);
-        int latestVelocityBuild = velocityPlugin.getLatestBuild();
+        velocityHelper = new VelocityHelper(logger, velocityVersion, buildNumber);
+        int latestVelocityBuild = velocityHelper.getLatestBuild();
         // Server is outdated
         if (buildNumber < latestVelocityBuild) {
             logger.warning("Your Velocity version is outdated. The latest build is " + latestVelocityBuild + ".");
-            logger.warning("You are currently " + velocityPlugin.getBuildsBehind() + " build(s) behind.");
+            logger.warning("You are currently " + velocityHelper.getBuildsBehind() + " build(s) behind.");
         }
     }
 }

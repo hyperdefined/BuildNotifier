@@ -15,9 +15,26 @@
  * along with BuildNotifier.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package lol.hyper.buildnotifier.paper.events;
+/*
+ * This file is part of BuildNotifier.
+ *
+ * BuildNotifier is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BuildNotifier is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BuildNotifier.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
-import lol.hyper.buildnotifier.paper.BuildNotifierPaper;
+package lol.hyper.buildnotifier.folia.events;
+
+import lol.hyper.buildnotifier.folia.BuildNotifierFolia;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -28,9 +45,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoin implements Listener {
 
-    private final BuildNotifierPaper buildNotifierPaper;
+    private final BuildNotifierFolia buildNotifierPaper;
 
-    public PlayerJoin(BuildNotifierPaper buildNotifierPaper) {
+    public PlayerJoin(BuildNotifierFolia buildNotifierPaper) {
         this.buildNotifierPaper = buildNotifierPaper;
     }
 
@@ -41,11 +58,11 @@ public class PlayerJoin implements Listener {
             return;
         }
 
-        int latestPaperBuild = buildNotifierPaper.paperHelper.getLatestBuild();
-        int buildsBehind = buildNotifierPaper.paperHelper.getBuildsBehind();
+        int latestPaperBuild = buildNotifierPaper.foliaHelper.getLatestBuild();
+        int buildsBehind = buildNotifierPaper.foliaHelper.getBuildsBehind();
         if (buildNotifierPaper.buildNumber < latestPaperBuild) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(buildNotifierPaper, () -> {
-                player.sendMessage(Component.text("Your Paper version is outdated. The latest build is " + latestPaperBuild + ".").color(NamedTextColor.YELLOW));
+                player.sendMessage(Component.text("Your Folia version is outdated. The latest build is " + latestPaperBuild + ".").color(NamedTextColor.YELLOW));
                 player.sendMessage(Component.text("You are currently " + buildsBehind + " build(s) behind.").color(NamedTextColor.YELLOW));
             }, 200);
         }
