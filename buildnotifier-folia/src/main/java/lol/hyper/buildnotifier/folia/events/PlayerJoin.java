@@ -37,7 +37,6 @@ package lol.hyper.buildnotifier.folia.events;
 import lol.hyper.buildnotifier.folia.BuildNotifierFolia;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -45,10 +44,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoin implements Listener {
 
-    private final BuildNotifierFolia buildNotifierPaper;
+    private final BuildNotifierFolia buildNotifierFolia;
 
-    public PlayerJoin(BuildNotifierFolia buildNotifierPaper) {
-        this.buildNotifierPaper = buildNotifierPaper;
+    public PlayerJoin(BuildNotifierFolia buildNotifierFolia) {
+        this.buildNotifierFolia = buildNotifierFolia;
     }
 
     @EventHandler
@@ -58,13 +57,13 @@ public class PlayerJoin implements Listener {
             return;
         }
 
-        int latestPaperBuild = buildNotifierPaper.foliaHelper.getLatestBuild();
-        int buildsBehind = buildNotifierPaper.foliaHelper.getBuildsBehind();
-        if (buildNotifierPaper.buildNumber < latestPaperBuild) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(buildNotifierPaper, () -> {
-                player.sendMessage(Component.text("Your Folia version is outdated. The latest build is " + latestPaperBuild + ".").color(NamedTextColor.YELLOW));
+        int latestFoliaBuild = buildNotifierFolia.foliaHelper.getLatestBuild();
+        int buildsBehind = buildNotifierFolia.foliaHelper.getBuildsBehind();
+        if (buildNotifierFolia.buildNumber < latestFoliaBuild) {
+            player.getScheduler().runDelayed(buildNotifierFolia, scheduledTask -> {
+                player.sendMessage(Component.text("Your Folia version is outdated. The latest build is " + latestFoliaBuild + ".").color(NamedTextColor.YELLOW));
                 player.sendMessage(Component.text("You are currently " + buildsBehind + " build(s) behind.").color(NamedTextColor.YELLOW));
-            }, 200);
+            }, null, 200);
         }
     }
 }
