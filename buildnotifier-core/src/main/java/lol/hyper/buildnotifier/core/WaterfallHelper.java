@@ -44,7 +44,6 @@ public class WaterfallHelper {
         this.pluginLogger = plugin.getLogger();
         this.serverVersion = serverVersion;
         this.waterfallBuild = waterfallBuild;
-        check();
     }
 
     /**

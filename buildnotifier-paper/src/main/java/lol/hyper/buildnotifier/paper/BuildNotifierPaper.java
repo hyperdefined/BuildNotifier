@@ -56,12 +56,15 @@ public final class BuildNotifierPaper extends JavaPlugin {
         logger.info("Running Paper build: " + buildNumber);
 
         paperHelper = new PaperHelper(this, minecraftVersion, buildNumber);
-        int latestPaperBuild = paperHelper.getLatestBuild();
-        // Server is outdated
-        if (buildNumber < latestPaperBuild) {
-            logger.warning("Your Paper version is outdated. The latest build is " + latestPaperBuild + ".");
-            logger.warning("You are currently " + paperHelper.getBuildsBehind() + " build(s) behind.");
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
+            paperHelper.check();
+            int latestPaperBuild = paperHelper.getLatestBuild();
+            // Server is outdated
+            if (buildNumber < latestPaperBuild) {
+                logger.warning("Your Paper version is outdated. The latest build is " + latestPaperBuild + ".");
+                logger.warning("You are currently " + paperHelper.getBuildsBehind() + " build(s) behind.");
+            }
+        });
 
         PlayerJoin playerJoin = new PlayerJoin(this);
         Bukkit.getServer().getPluginManager().registerEvents(playerJoin, this);

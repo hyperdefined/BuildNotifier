@@ -56,12 +56,15 @@ public final class BuildNotifierWaterfall extends Plugin {
         logger.info("Running Waterfall build: " + buildNumber);
 
         waterfallHelper = new WaterfallHelper(this, minecraftVersion, buildNumber);
-        int latestWaterfallBuild = waterfallHelper.getLatestBuild();
-        // Server is outdated
-        if (buildNumber < latestWaterfallBuild) {
-            logger.warning("Your Waterfall version is outdated. The latest build is " + latestWaterfallBuild + ".");
-            logger.warning("You are currently " + waterfallHelper.getBuildsBehind() + " build(s) behind.");
-        }
+        ProxyServer.getInstance().getScheduler().runAsync(this, () -> {
+            waterfallHelper.check();
+            int latestWaterfallBuild = waterfallHelper.getLatestBuild();
+            // Server is outdated
+            if (buildNumber < latestWaterfallBuild) {
+                logger.warning("Your Waterfall version is outdated. The latest build is " + latestWaterfallBuild + ".");
+                logger.warning("You are currently " + waterfallHelper.getBuildsBehind() + " build(s) behind.");
+            }
+        });
 
         PlayerJoin playerJoin = new PlayerJoin(this);
         ProxyServer.getInstance().getPluginManager().registerListener(this, playerJoin);

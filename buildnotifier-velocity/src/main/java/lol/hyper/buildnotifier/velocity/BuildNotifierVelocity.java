@@ -75,12 +75,15 @@ public final class BuildNotifierVelocity {
         logger.info("Supporting Minecraft versions: " + ProtocolVersion.SUPPORTED_VERSION_STRING);
 
         velocityHelper = new VelocityHelper(logger, velocityVersion, buildNumber);
-        int latestVelocityBuild = velocityHelper.getLatestBuild();
-        // Server is outdated
-        if (buildNumber < latestVelocityBuild) {
-            logger.warning("Your Velocity version is outdated. The latest build is " + latestVelocityBuild + ".");
-            logger.warning("You are currently " + velocityHelper.getBuildsBehind() + " build(s) behind.");
-        }
+        server.getScheduler().buildTask(this, () -> {
+            velocityHelper.check();
+            int latestVelocityBuild = velocityHelper.getLatestBuild();
+            // Server is outdated
+            if (buildNumber < latestVelocityBuild) {
+                logger.warning("Your Velocity version is outdated. The latest build is " + latestVelocityBuild + ".");
+                logger.warning("You are currently " + velocityHelper.getBuildsBehind() + " build(s) behind.");
+            }
+        }).schedule();
 
         PlayerJoin playerJoin = new PlayerJoin(this);
         server.getEventManager().register(this, playerJoin);

@@ -44,7 +44,6 @@ public class FoliaHelper {
         this.pluginLogger = plugin.getLogger();
         this.serverVersion = serverVersion;
         this.paperBuild = paperBuild;
-        check();
     }
 
     /**

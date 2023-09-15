@@ -71,7 +71,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>org.json</pattern>
-                                    <shadedPattern>lol.hyper.paperupdatercore.json</shadedPattern>
+                                    <shadedPattern>lol.hyper.buildnotifier.core.json</shadedPattern>
                                 </relocation>
                             </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>

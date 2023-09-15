@@ -44,7 +44,6 @@ public class PaperHelper {
         this.pluginLogger = plugin.getLogger();
         this.serverVersion = serverVersion;
         this.paperBuild = paperBuild;
-        check();
     }
 
     /**

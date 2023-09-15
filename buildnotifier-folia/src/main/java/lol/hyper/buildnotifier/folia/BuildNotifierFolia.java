@@ -73,12 +73,15 @@ public final class BuildNotifierFolia extends JavaPlugin {
         logger.info("Running Folia build: " + buildNumber);
 
         foliaHelper = new FoliaHelper(this, minecraftVersion, buildNumber);
-        int latestFoliaBuild = foliaHelper.getLatestBuild();
-        // Server is outdated
-        if (buildNumber < latestFoliaBuild) {
-            logger.warning("Your Folia version is outdated. The latest build is " + latestFoliaBuild + ".");
-            logger.warning("You are currently " + foliaHelper.getBuildsBehind() + " build(s) behind.");
-        }
+        Bukkit.getAsyncScheduler().runNow(this, scheduledTask -> {
+            foliaHelper.check();
+            int latestFoliaBuild = foliaHelper.getLatestBuild();
+            // Server is outdated
+            if (buildNumber < latestFoliaBuild) {
+                logger.warning("Your Folia version is outdated. The latest build is " + latestFoliaBuild + ".");
+                logger.warning("You are currently " + foliaHelper.getBuildsBehind() + " build(s) behind.");
+            }
+        });
 
         PlayerJoin playerJoin = new PlayerJoin(this);
         Bukkit.getServer().getPluginManager().registerEvents(playerJoin, this);

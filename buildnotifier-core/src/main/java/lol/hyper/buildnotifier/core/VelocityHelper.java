@@ -43,7 +43,6 @@ public class VelocityHelper {
         this.pluginLogger = pluginLogger;
         this.velocityVersion = velocityVersion;
         this.velocityBuild = velocityBuild;
-        check();
     }
 
     /**
