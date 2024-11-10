@@ -1,0 +1,1 @@
+{"id":"buildnotifiervelocity", "name":"BuildNotifier-Velocity", "version":"1.0.1", "authors":["hyperdefined"], "description":"Automatically check for Paper/Waterfall/Velocity/Folia updates.", "url":"https://github.com/hyperdefined/BuildNotifier","dependencies":[],"main":"lol.hyper.buildnotifier.velocity.BuildNotifierVelocity"}

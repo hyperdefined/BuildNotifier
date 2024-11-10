@@ -25,18 +25,21 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import lol.hyper.buildnotifier.core.VelocityHelper;
 import lol.hyper.buildnotifier.velocity.events.PlayerJoin;
+import lombok.Getter;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Getter
 @Plugin(
         id = "buildnotifiervelocity",
         name = "BuildNotifier-Velocity",
         version = "1.0.1",
         authors = {"hyperdefined"},
         description = "Automatically check for Paper/Waterfall/Velocity/Folia updates.",
-        url = "https://github.com/hyperdefined/BuildNotifier"
+        url = "https://github.com/hyperdefined/BuildNotifier",
+        dependencies = {}
 )
 public final class BuildNotifierVelocity {
 
@@ -55,14 +58,16 @@ public final class BuildNotifierVelocity {
     public void onProxyInitialization(ProxyInitializeEvent event) {
         // get some basic information about the server
         String version = server.getVersion().getVersion();
+        System.out.println("Running Velocity version: " + version);
         String[] versionParts = version.split(" ", 2);
         String velocityVersion = versionParts[0];
-        // use regex to get the build
-        String patternString = "b\\d+";
+        String patternString = "b(\\d+)";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(versionParts[1]);
-        if (matcher.find()) {
-            buildNumber = Integer.parseInt(matcher.group().replace("b", ""));
+
+        int buildNumber = 0;
+        while (matcher.find()) {
+            buildNumber = Integer.parseInt(matcher.group(1));
         }
 
         // if the regex failed, don't bother checking
@@ -75,11 +80,12 @@ public final class BuildNotifierVelocity {
         logger.info("Supporting Minecraft versions: " + ProtocolVersion.SUPPORTED_VERSION_STRING);
 
         velocityHelper = new VelocityHelper(logger, velocityVersion, buildNumber);
+        int finalBuildNumber = buildNumber;
         server.getScheduler().buildTask(this, () -> {
             velocityHelper.check();
             int latestVelocityBuild = velocityHelper.getLatestBuild();
             // Server is outdated
-            if (buildNumber < latestVelocityBuild) {
+            if (finalBuildNumber < latestVelocityBuild) {
                 logger.warning("Your Velocity version is outdated. The latest build is " + latestVelocityBuild + ".");
                 logger.warning("You are currently " + velocityHelper.getBuildsBehind() + " build(s) behind.");
             }
