@@ -65,7 +65,6 @@ public final class BuildNotifierVelocity {
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(versionParts[1]);
 
-        int buildNumber = 0;
         while (matcher.find()) {
             buildNumber = Integer.parseInt(matcher.group(1));
         }
@@ -80,12 +79,11 @@ public final class BuildNotifierVelocity {
         logger.info("Supporting Minecraft versions: " + ProtocolVersion.SUPPORTED_VERSION_STRING);
 
         velocityHelper = new VelocityHelper(logger, velocityVersion, buildNumber);
-        int finalBuildNumber = buildNumber;
         server.getScheduler().buildTask(this, () -> {
             velocityHelper.check();
             int latestVelocityBuild = velocityHelper.getLatestBuild();
             // Server is outdated
-            if (finalBuildNumber < latestVelocityBuild) {
+            if (buildNumber < latestVelocityBuild) {
                 logger.warning("Your Velocity version is outdated. The latest build is " + latestVelocityBuild + ".");
                 logger.warning("You are currently " + velocityHelper.getBuildsBehind() + " build(s) behind.");
             }
