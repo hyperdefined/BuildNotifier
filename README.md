@@ -1,7 +1,7 @@
 <h1 align="center">BuildNotifier</h1>
 
 <p align="center">
-	<img src="https://img.shields.io/badge/Minecraft-1.21.4-orange" alt="Minecraft versions">
+	<img src="https://img.shields.io/badge/Minecraft-1.21+-orange" alt="Minecraft versions">
 	<img src="https://img.shields.io/github/v/release/hyperdefined/BuildNotifier" alt="GitHub release (latest by date)">
 	<a href="https://github.com/hyperdefined/BuildNotifier/releases"><img src="https://img.shields.io/github/downloads/hyperdefined/BuildNotifier/total?logo=github" alt="Downloads"></a>
 	<a href="https://ko-fi.com/hyperdefined"><img src="https://img.shields.io/badge/Donate-Ko--fi-red" alt="Donate via Ko-fi"></a>
