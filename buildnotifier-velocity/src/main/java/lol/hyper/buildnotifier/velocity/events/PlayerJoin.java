@@ -36,8 +36,9 @@ public class PlayerJoin {
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    @Subscribe(order = PostOrder.FIRST)
+    @Subscribe
     public void onPlayerLogin(ServerPostConnectEvent event) {
+
         // player is joining the proxy
         if (event.getPreviousServer() != null) {
             return;
