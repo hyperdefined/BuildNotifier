@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
 @Plugin(
         id = "buildnotifiervelocity",
         name = "BuildNotifier-Velocity",
-        version = "1.0.2",
+        version = "1.0.3",
         authors = {"hyperdefined"},
         description = "Automatically check for Paper/Velocity updates.",
         url = "https://github.com/hyperdefined/BuildNotifier",
@@ -111,7 +111,7 @@ public final class BuildNotifierVelocity {
             e.printStackTrace();
             return;
         }
-        GitHubRelease current = api.getReleaseByTag("1.0.2");
+        GitHubRelease current = api.getReleaseByTag("1.0.3");
         GitHubRelease latest = api.getLatestVersion();
         if (current == null) {
             logger.warning("You are running a version that does not exist on GitHub. If you are in a dev environment, you can ignore this. Otherwise, this is a bug!");
