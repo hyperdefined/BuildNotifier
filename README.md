@@ -8,7 +8,7 @@
 	<a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a>
 </p>
 
-Automatically check for Paper/Waterfall/Velocity/Folia updates on server start up. This does NOT download versions for you.
+Automatically check for Paper/Velocity updates on server start up. This does NOT download versions for you.
 
 ## Features
 * Logs to console on startup if there are any new versions.

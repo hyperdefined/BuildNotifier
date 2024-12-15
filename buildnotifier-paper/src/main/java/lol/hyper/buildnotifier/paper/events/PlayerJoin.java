@@ -45,8 +45,8 @@ public class PlayerJoin implements Listener {
         int buildsBehind = buildNotifierPaper.paperHelper.getBuildsBehind();
         if (buildNotifierPaper.buildNumber < latestPaperBuild) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(buildNotifierPaper, () -> {
-                player.sendMessage(Component.text("Your Paper version is outdated. The latest build is " + latestPaperBuild + ".").color(NamedTextColor.YELLOW));
-                player.sendMessage(Component.text("You are currently " + buildsBehind + " build(s) behind.").color(NamedTextColor.YELLOW));
+                player.sendMessage(Component.text("Your Paper version is outdated. The latest build is " + latestPaperBuild + ".", NamedTextColor.YELLOW));
+                player.sendMessage(Component.text("You are currently " + buildsBehind + " build(s) behind.", NamedTextColor.YELLOW));
             }, 200);
         }
     }

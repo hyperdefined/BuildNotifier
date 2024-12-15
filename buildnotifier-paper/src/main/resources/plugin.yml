@@ -2,8 +2,9 @@ name: BuildNotifier-Paper
 version: '${project.version}'
 main: lol.hyper.buildnotifier.paper.BuildNotifierPaper
 author: hyperdefined
-api-version: 1.19
-description: "Automatically check for Paper/Waterfall/Velocity/Folia updates."
+api-version: 1.21
+description: "Automatically check for Paper/Velocity updates."
+website: https://github.com/hyperdefined/BuildNotifier
 permissions:
   buildnotifier.message:
     default: op

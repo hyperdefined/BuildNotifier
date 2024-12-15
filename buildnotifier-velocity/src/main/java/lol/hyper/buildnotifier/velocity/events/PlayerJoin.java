@@ -17,7 +17,6 @@
 
 package lol.hyper.buildnotifier.velocity.events;
 
-import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.player.ServerPostConnectEvent;
 import com.velocitypowered.api.proxy.Player;
@@ -53,8 +52,8 @@ public class PlayerJoin {
         int buildsBehind = buildNotifierVelocity.velocityHelper.getBuildsBehind();
         if (buildNotifierVelocity.buildNumber < latestVelocityBuild) {
             buildNotifierVelocity.server.getScheduler().buildTask(buildNotifierVelocity, (task) -> {
-                player.sendMessage(Component.text("Your Velocity version is outdated. The latest version is " + latestVelocityBuild + ".").color(NamedTextColor.YELLOW));
-                player.sendMessage(Component.text("You are currently " + buildsBehind + " builds behind.").color(NamedTextColor.YELLOW));
+                player.sendMessage(Component.text("Your Velocity version is outdated. The latest version is " + latestVelocityBuild + ".", NamedTextColor.YELLOW));
+                player.sendMessage(Component.text("You are currently " + buildsBehind + " builds behind.", NamedTextColor.YELLOW));
             }).delay(10, TimeUnit.SECONDS).schedule();
         }
     }

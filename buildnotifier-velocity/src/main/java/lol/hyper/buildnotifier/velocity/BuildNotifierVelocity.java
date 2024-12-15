@@ -25,8 +25,12 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import lol.hyper.buildnotifier.core.VelocityHelper;
 import lol.hyper.buildnotifier.velocity.events.PlayerJoin;
+import lol.hyper.githubreleaseapi.GitHubRelease;
+import lol.hyper.githubreleaseapi.GitHubReleaseAPI;
 import lombok.Getter;
+import org.bstats.velocity.Metrics;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,9 +39,9 @@ import java.util.regex.Pattern;
 @Plugin(
         id = "buildnotifiervelocity",
         name = "BuildNotifier-Velocity",
-        version = "1.0.1",
+        version = "1.0.2",
         authors = {"hyperdefined"},
-        description = "Automatically check for Paper/Waterfall/Velocity/Folia updates.",
+        description = "Automatically check for Paper/Velocity updates.",
         url = "https://github.com/hyperdefined/BuildNotifier",
         dependencies = {}
 )
@@ -47,11 +51,13 @@ public final class BuildNotifierVelocity {
     public final ProxyServer server;
     public int buildNumber = -1;
     public VelocityHelper velocityHelper;
+    private final Metrics.Factory metricsFactory;
 
     @Inject
-    public BuildNotifierVelocity(ProxyServer server, Logger logger) {
+    public BuildNotifierVelocity(ProxyServer server, Logger logger, Metrics.Factory metricsFactory) {
         this.server = server;
         this.logger = logger;
+        this.metricsFactory = metricsFactory;
     }
 
     @Subscribe
@@ -91,5 +97,31 @@ public final class BuildNotifierVelocity {
 
         PlayerJoin playerJoin = new PlayerJoin(this);
         server.getEventManager().register(this, playerJoin);
+        server.getScheduler().buildTask(this, this::checkForUpdates).schedule();
+
+        metricsFactory.make(this, 24156);
+    }
+
+    public void checkForUpdates() {
+        GitHubReleaseAPI api;
+        try {
+            api = new GitHubReleaseAPI("BuildNotifier", "hyperdefined");
+        } catch (IOException e) {
+            logger.warning("Unable to check updates!");
+            e.printStackTrace();
+            return;
+        }
+        GitHubRelease current = api.getReleaseByTag("1.0.2");
+        GitHubRelease latest = api.getLatestVersion();
+        if (current == null) {
+            logger.warning("You are running a version that does not exist on GitHub. If you are in a dev environment, you can ignore this. Otherwise, this is a bug!");
+            return;
+        }
+        int buildsBehind = api.getBuildsBehind(current);
+        if (buildsBehind == 0) {
+            logger.info("You are running the latest version of BuildNotifier-Velocity.");
+        } else {
+            logger.warning("A new version is available (" + latest.getTagVersion() + ")! You are running version " + current.getTagVersion() + ". You are " + buildsBehind + " version(s) behind.");
+        }
     }
 }

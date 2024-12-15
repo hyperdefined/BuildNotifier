@@ -17,14 +17,17 @@
 
 package lol.hyper.buildnotifier.paper;
 
-import lol.hyper.buildnotifier.paper.events.PlayerJoin;
+import io.papermc.paper.ServerBuildInfo;
 import lol.hyper.buildnotifier.core.PaperHelper;
+import lol.hyper.buildnotifier.paper.events.PlayerJoin;
+import lol.hyper.githubreleaseapi.GitHubRelease;
+import lol.hyper.githubreleaseapi.GitHubReleaseAPI;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class BuildNotifierPaper extends JavaPlugin {
 
@@ -35,20 +38,11 @@ public final class BuildNotifierPaper extends JavaPlugin {
     @Override
     public void onEnable() {
         // get some basic information about the server
-        String serverVersion = Bukkit.getServer().getVersion();
-        // use regex to get the build and MC version
-        // if there is a better way please show me :)
-        String patternString = "git-Paper-(\\w+) \\(MC: (\\d+\\.\\d+\\.\\d+)\\)";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(serverVersion);
-        String minecraftVersion = null;
-        if (matcher.find()) {
-            buildNumber = Integer.parseInt(matcher.group(1));
-            minecraftVersion = matcher.group(2);
-        }
-
-        // if the regex failed, don't bother checking
-        if (buildNumber == -1 || minecraftVersion == null) {
+        ServerBuildInfo build = ServerBuildInfo.buildInfo();
+        buildNumber = build.buildNumber().orElse(-1);
+        String minecraftVersion = build.minecraftVersionId();
+        // if we can't get the build information, skip
+        if (buildNumber == -1) {
             return;
         }
 
@@ -68,5 +62,31 @@ public final class BuildNotifierPaper extends JavaPlugin {
 
         PlayerJoin playerJoin = new PlayerJoin(this);
         Bukkit.getServer().getPluginManager().registerEvents(playerJoin, this);
+        Bukkit.getAsyncScheduler().runNow(this, scheduledTask -> checkForUpdates());
+
+        new Metrics(this, 24155);
+    }
+
+    public void checkForUpdates() {
+        GitHubReleaseAPI api;
+        try {
+            api = new GitHubReleaseAPI("BuildNotifier", "hyperdefined");
+        } catch (IOException e) {
+            logger.warning("Unable to check updates!");
+            e.printStackTrace();
+            return;
+        }
+        GitHubRelease current = api.getReleaseByTag(this.getDescription().getVersion());
+        GitHubRelease latest = api.getLatestVersion();
+        if (current == null) {
+            logger.warning("You are running a version that does not exist on GitHub. If you are in a dev environment, you can ignore this. Otherwise, this is a bug!");
+            return;
+        }
+        int buildsBehind = api.getBuildsBehind(current);
+        if (buildsBehind == 0) {
+            logger.info("You are running the latest version of BuildNotifier-Paper.");
+        } else {
+            logger.warning("A new version is available (" + latest.getTagVersion() + ")! You are running version " + current.getTagVersion() + ". You are " + buildsBehind + " version(s) behind.");
+        }
     }
 }
